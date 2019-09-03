@@ -27,7 +27,7 @@ export default class extends React.Component {
       `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${API_Key}&units=metric`
     );
 
-    // After getting the weather, store the temp data by using setState
+    // After getting weather, store all the data in state. Set isloading: false
     this.setState({
       isLoading: false,
       condition: weather[0].main,
@@ -47,14 +47,10 @@ export default class extends React.Component {
           longitude
         }
       } = await Location.getCurrentPositionAsync();
-
       this.getWeather(latitude, longitude);
-      this.setState({
-        isLoading: false
-      }); // Loading's completed. Set isloading: false
     } catch (error) {
       // When you cannot get the location O<-<
-      Alert.alert("흑흑 어디에 있나요 그대", "너무너무슬퍼요!");
+      Alert.alert("흑흑 어디에 있나요 그대", "날씨를 구할 수 없어요!!");
     }
   };
   componentDidMount() {
@@ -68,6 +64,6 @@ export default class extends React.Component {
     } = this.state;
     
     // How to put temperature @ weather? We use state! Data.main.temp we need.
-    return isLoading ? ( <Loading />) :  (<Weather temp = { Math.round(temp) } condition={ condition }/> );
+    return isLoading ? ( <Loading />) :  (<Weather temp = { Math.round(temp) } condition={condition}/> );
   }
 }
