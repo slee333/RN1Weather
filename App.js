@@ -1,7 +1,5 @@
 import React from "react";
 
-//import { StyleSheet, Text, View } from 'react-native';
-
 // Importing all necessary components
 import {
   Alert
